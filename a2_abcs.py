@@ -536,6 +536,7 @@ class DecoderBase(torch.nn.Module, metaclass=abc.ABCMeta):
 
     @abc.abstractmethod
     def get_current_rnn_input(
+            self,
             E_tm1: torch.LongTensor,
             htilde_tm1: Union[
                 torch.FloatTensor,
