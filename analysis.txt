@@ -1,7 +1,4 @@
-<<<<<<< Updated upstream
-test change
-=======
-Without Attention
+Without Attention:
 
 TRAIN
 
@@ -44,7 +41,7 @@ End Avg BLEU
 %%%%%
 The average BLEU score over the test set was 0.32662160384211353
 
-With Attention
+With Attention:
 
 TRAIN 
 
@@ -87,7 +84,7 @@ End Avg BLEU
 The average BLEU score over the test set was 0.3670035750395061
 
 
-With Multi Attention
+With Multi Attention:
 
 TRAIN 
 
@@ -130,4 +127,20 @@ End Avg BLEU
 The average BLEU score over the test set was 0.37333641627378356
 
 
->>>>>>> Stashed changes
+Discussion:
+
+Over all three experiments, the training loss decreases with each epoch, and the BLEU score increases.
+In training, the model with single-headed attention outperforms the model with multi-headed attention with a small margin, and the model
+without attention by a significant margin in terms of the BLEU score. Out of all three models, the model without attention had the highest loss
+after finishing 5 epochs. In testing, the model with multi-headed attention outperformed the model with single-headed attention by a slight margin,
+and without attention again with a significant margin.
+
+Although it is typically expected that the training BLEU score would be equal or better than the testing BLEU score, I noticed that in my experiments,
+the testing BLEU scores were higher than the training BLEU scores. Testing makes use of beam search, while training uses strategies like teacher forcing that potentially lead
+to exposure bias, and a lower BLEU scores.
+
+Taking into consideration both the BLEU score and loss, the multi-headed attention model and single-headed attention model outperform the model without attention. This
+is expected given the benefits of using attention, which involve having access to the entire input sequence can can pick elements from the input sequence to produce the output.
+Both multi-headed and single-headed outperformed each other in one metric or another. In training, multi-headed model has a slightly better BLEU score, but single-headed model has
+a lower loss. In testing, multi-headed model outperforms the single-headed model. In theory multi-headed attention model should perform better as it can encode multiple relationships 
+and acquire richer interpretations for words and sequences. This could be because of lack of overfitting on the training set, and good generalization on the unseen test set.
