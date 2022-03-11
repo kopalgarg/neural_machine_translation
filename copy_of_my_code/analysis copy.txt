@@ -1,0 +1,129 @@
+Without Attention
+
+TRAIN
+
+Begin Training
+End Training
+Start Avg BLEU
+End Avg BLEU
+%%%%%
+Epoch 1: loss=3.423356377545835, BLEU=0.2367941476229751
+Begin Training
+End Training
+Start Avg BLEU
+End Avg BLEU
+%%%%%
+Epoch 2: loss=2.4649259496097575, BLEU=0.2653114344624662
+Begin Training
+End Training
+Start Avg BLEU
+End Avg BLEU
+%%%%%
+Epoch 3: loss=2.0053910482649098, BLEU=0.2778295321570111
+Begin Training
+End Training
+Start Avg BLEU
+End Avg BLEU
+%%%%%
+Epoch 4: loss=1.6547756938547762, BLEU=0.2869623008002583
+Begin Training
+End Training
+Start Avg BLEU
+End Avg BLEU
+%%%%%
+Epoch 5: loss=1.3814649211816774, BLEU=0.29292240232609146
+Finished 5 epochs
+
+TEST 
+
+Start Avg BLEU
+End Avg BLEU
+%%%%%
+The average BLEU score over the test set was 0.32662160384211353
+
+With Attention
+
+TRAIN 
+
+Begin Training
+End Training
+Start Avg BLEU
+End Avg BLEU
+%%%%%
+Epoch 1: loss=3.1873609432148418, BLEU=0.27657988170688624
+Begin Training
+End Training
+Start Avg BLEU
+End Avg BLEU
+%%%%%
+Epoch 2: loss=2.1404970140843718, BLEU=0.305661748151714
+Begin Training
+End Training
+Start Avg BLEU
+End Avg BLEU
+%%%%%
+Epoch 3: loss=1.6726492654887393, BLEU=0.31909238891958497
+Begin Training
+End Training
+Start Avg BLEU
+End Avg BLEU
+%%%%%
+Epoch 4: loss=1.3407613930752726, BLEU=0.32459170688343625
+Begin Training
+End Training
+Start Avg BLEU
+End Avg BLEU
+%%%%%
+Epoch 5: loss=1.0992113592601602, BLEU=0.32591971824999694
+Finished 5 epochs
+
+TEST 
+Start Avg BLEU
+End Avg BLEU
+%%%%%
+The average BLEU score over the test set was 0.3670035750395061
+
+
+With Multi Attention
+
+TRAIN 
+
+Begin Training
+End Training
+Start Avg BLEU
+End Avg BLEU
+%%%%%
+Epoch 1: loss=3.198524470265589, BLEU=0.273299888198343
+Begin Training
+End Training
+Start Avg BLEU
+End Avg BLEU
+%%%%%
+Epoch 2: loss=2.182878668052378, BLEU=0.3002859871143766
+Begin Training
+End Training
+Start Avg BLEU
+End Avg BLEU
+%%%%%
+Epoch 3: loss=1.7665060267147519, BLEU=0.31475004081767644
+Begin Training
+End Training
+Start Avg BLEU
+End Avg BLEU
+%%%%%
+Epoch 4: loss=1.4786457762856573, BLEU=0.32305189800327627
+Begin Training
+End Training
+Start Avg BLEU
+End Avg BLEU
+%%%%%
+Epoch 5: loss=1.269349215849925, BLEU=0.3248401736808362
+Finished 5 epochs
+
+TEST 
+Start Avg BLEU
+End Avg BLEU
+%%%%%
+The average BLEU score over the test set was 0.37333641627378356
+
+
