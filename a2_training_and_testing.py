@@ -85,7 +85,42 @@ def train_for_epoch(
     # If you are running into CUDA memory errors part way through training,
     # try "del F, F_lens, E, logits, loss" at the end of each iteration of
     # the loop.
-    assert False, "Fill me"
+    func = torch.nn.CrossEntropyLoss(ignore_index = model.source_pad_id)
+    total_loss, batches = 0,0
+
+    print("Begin Training")
+
+    for F, F_lens, E in dataloader:
+        F = F.to(device)
+        F_lens = F_lens.to(device)
+        E = E.to(device)
+
+        optimizer.zero_grad() # zero gradient
+
+        logits = model(F, F_lens, E).to(device)
+
+        E = E[1:, :]
+        E = E.masked_fill(model.get_target_padding_mask(E), model.source_pad_id)
+
+        logits = logits.flatten(0, 1)
+
+        flatE = torch.flatten(E, start_dim =0)
+
+        # cross entropy
+        CE = func(logits, flatE)
+
+        CE.backward() # backprop
+
+        optimizer.step()
+
+        total_loss += CE.item()
+        batches += 1 
+
+    avg_loss = total_loss/batches
+
+    print("End Training")
+
+    return avg_loss
 
 
 def compute_batch_total_bleu(
@@ -114,9 +149,19 @@ def compute_batch_total_bleu(
         The sum total BLEU score for across all elements in the batch. Use
         n-gram precision 4.
     '''
-    # you can use E_ref.tolist() to convert the LongTensor to a python list
-    # of numbers
-    assert False, "Fill me"
+
+    total_bleu,n_gram_precision = 0, 4
+    str_eos, str_sos = str(target_eos),str(target_sos)
+
+    E_ref, E_cand = E_ref.permute(1, 0).tolist(), E_cand.permute(1, 0).tolist()
+
+    for ref, cand in zip(E_ref, E_cand):
+        ref =  [str(i) for i in ref if ((str(i) != str_eos) and (str(i) != str_sos))]
+        cand = [str(j) for j in cand if ((str(j) != str_eos) and (str(j) != str_sos))]
+        
+        total_bleu = total_bleu + a2_bleu_score.BLEU_score(ref, cand, n_gram_precision)
+
+    return total_bleu
 
 
 def compute_average_bleu_over_dataset(
@@ -158,4 +203,20 @@ def compute_average_bleu_over_dataset(
         The total BLEU score summed over all sequences divided by the number of
         sequences
     '''
-    assert False, "Fill me"
+    print("Starting Avg BLEU")
+
+    points, total = 0,0
+    for F, F_lens, E in dataloader:
+        F , F_lens= F.to(device), F_lens.to(device)
+        
+        b_1 = model(F, F_lens)
+        E_cand = b_1[:,:,0]
+        
+        total += compute_batch_total_bleu(E, E_cand, target_sos, target_eos)
+        points += F_lens.shape[0]
+
+    print("End Avg BLEU")
+
+    print("%%%%%")
+    avg_bleu = total/points
+    return avg_bleu
