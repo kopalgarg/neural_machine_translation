@@ -39,7 +39,12 @@ def grouper(seq:Sequence[str], n:int) -> List:
     -------
     ngrams : list
     '''
-    assert False, "Fill me"
+    ngrams = []
+
+    for i in range(0, len(seq) - n + 1):
+        ngrams.append(" ".join(seq[i: i + n]))
+
+    return ngrams
 
 
 def n_gram_precision(reference:Sequence[str], candidate:Sequence[str], n:int) -> float:
@@ -61,7 +66,21 @@ def n_gram_precision(reference:Sequence[str], candidate:Sequence[str], n:int) ->
         The n-gram precision. In the case that the candidate has length 0,
         `p_n` is 0.
     '''
-    assert False, "Fill me"
+    p_n = 0
+
+    candidate_ngrams = grouper(candidate, n)
+    reference_ngrams = grouper(reference, n)
+    count = 0
+    if len(candidate) > 0:
+        for c in candidate_ngrams:
+            if c in reference_ngrams:
+                count+=1
+        if len(candidate_ngrams)>0:
+            p_n = count/len(candidate_ngrams)
+    else:
+        p_n = 0
+
+    return p_n
 
 
 def brevity_penalty(reference:Sequence[str], candidate:Sequence[str]) -> float:
@@ -81,8 +100,18 @@ def brevity_penalty(reference:Sequence[str], candidate:Sequence[str]) -> float:
         The brevity penalty. In the case that the candidate transcription is
         of 0 length, `BP` is 0.
     '''
-    assert False, "Fill me"
+    BP = 0
 
+    if len(candidate) > 0:
+        br = len(reference)/len(candidate)
+        if br < 1:
+            BP  = 1
+        else:
+            BP = exp(1-br)
+    else:
+        BP = 0
+
+    return BP
 
 def BLEU_score(reference:Sequence[str], candidate:Sequence[str], n) -> float:
     '''Calculate the BLEU score
@@ -104,4 +133,13 @@ def BLEU_score(reference:Sequence[str], candidate:Sequence[str], n) -> float:
     bleu : float
         The BLEU score
     '''
-    assert False, "Fill me"
+    p_scores = 1
+    for i in range(1, n+1):
+        prec = n_gram_precision(reference, candidate, i)
+        p_scores *= prec
+    
+    BP = brevity_penalty(reference, candidate)
+
+    bleu = BP * (p_scores ** (1 / n))
+
+    return bleu
