@@ -159,7 +159,7 @@ def compute_batch_total_bleu(
         ref =  [str(i) for i in ref if ((str(i) != str_eos) and (str(i) != str_sos))]
         cand = [str(j) for j in cand if ((str(j) != str_eos) and (str(j) != str_sos))]
         
-        total_bleu = total_bleu + a2_bleu_score.BLEU_score(ref, cand, n_gram_precision)
+        total_bleu += a2_bleu_score.BLEU_score(ref, cand, n_gram_precision)
 
     return total_bleu
 
