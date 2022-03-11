@@ -1,0 +1,32 @@
+begin training
+begin training
+ended train
+starting average bleu
+ended average bleu
+%%%%%
+Epoch 1: loss=3.186393995429996, BLEU=0.2753160955091155
+begin training
+ended train
+starting average bleu
+ended average bleu
+%%%%%
+Epoch 2: loss=2.1393158253520825, BLEU=0.3057005965213769
+begin training
+ended train
+starting average bleu
+ended average bleu
+%%%%%
+Epoch 3: loss=1.6713588177910712, BLEU=0.3179436932564268
+begin training
+ended train
+starting average bleu
+ended average bleu
+%%%%%
+Epoch 4: loss=1.3398116723231488, BLEU=0.3248401443318683
+begin training
+ended train
+starting average bleu
+ended average bleu
+%%%%%
+Epoch 5: loss=1.0985867362151986, BLEU=0.3259702432292603
+Finished 5 epochs
