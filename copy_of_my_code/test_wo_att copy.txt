@@ -1,0 +1,5 @@
+starting average bleu
+starting average bleu
+ended average bleu
+%%%%%
+The average BLEU score over the test set was 0.32662160384211353
